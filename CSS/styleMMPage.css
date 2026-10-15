@@ -1,0 +1,12 @@
+img {
+    width: 600px;
+}
+article {
+    display: flex;
+}
+aside {
+    flex: 1;
+}
+
+
+/* meow */
