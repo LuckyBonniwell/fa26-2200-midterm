@@ -75,31 +75,66 @@ a {
     transition: color 0.3s ease, text-decoration-color 0.3s;
  }
 
-a:hover {
+a:hover,
+a:visited:hover {
     color: var(--color-accent);
     text-decoration: underline;
     text-decoration-color: var(--color-highlight);
 }
 
 a:visited {
-    color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 /* nav */
 nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: white;
     width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
+    box-sizing: border-box;
 }
 
-nav ul {
+/* Website name and logo on the left */
+.nav-branding {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+    font-size: 1.4rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-branding img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+/* Navigation links on the right */
+nav > ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm) var(--spacing-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* nav ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm) var(--spacing-md);
     list-style: none;
     padding-bottom: var(--spacing-sm);
     margin: 0;
-}
+} */
 
 nav a {
     color: var(--color-primary);
@@ -147,8 +182,8 @@ header.h1 {
 
 .swatch {
     display: inline-block;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 2rem;
+    height: 2rem;
     background-color: var(--color-highlight);
     border: 1px solid var(--color-secondary);
     border-radius: var(--radius-sm);
@@ -180,6 +215,11 @@ main article:has(.supplementary-img) {
 .article-text {
     flex: 1;
     margin-left: var(--spacing-lg);
+}
+
+.color-sentence {
+    color: black;
+    font-size: 1.25rem;
 }
 
 /* footer */
@@ -236,4 +276,69 @@ footer strong {
     .article-text {
         margin-left: 0;
     }
+}
+
+/* stuff to get the nav bar to work*/
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font: inherit;
+    padding: var(--spacing-xs);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    padding: var(--spacing-sm);
+    margin: 0;
+    list-style: none;
+    background: white;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 10px #0002;
+    z-index: 100;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: var(--spacing-sm);
+    white-space: nowrap;
+}
+
+/* Show menu when opened */
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+/* Keyboard focus */
+.dropdown a:focus-visible,
+.dropdown-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.dropdown-toggle {
+    font-size: 0.7rem;
+    padding: 0rem;
+    margin: 0rem;
 }
