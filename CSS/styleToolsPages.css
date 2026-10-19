@@ -28,50 +28,23 @@
     --radius-lg: 12px;
 }
 
-<<<<<<< HEAD
-=======
-body {
-    font-family: var(--font-primary);
-    line-height: 1.6;
-    background-color: var(--color-background);
-    color: var(--color-text-dark);
-    padding: var(--spacing-xl);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
 /* Typography Styles */
 h1 {
     font-family: "brother-1816", sans-serif;
     font-weight: 400;
-<<<<<<< HEAD
     font-style: normal;
-=======
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
     font-size: 3rem;
     margin-bottom: var(--spacing-md);
     color: var(--color-primary);
 }
 
 h2 {
-<<<<<<< HEAD
     font-family: "brother-1816", sans-serif;
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: var(--spacing-md);
     color: var(--color-primary);
  }
-=======
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-secondary);
-}
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
 
 h3 {
     font-size: 1.5rem;
@@ -81,10 +54,7 @@ h3 {
 }
 
 p {
-<<<<<<< HEAD
     font-size: 1rem;
-=======
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
     margin-bottom: var(--spacing-md);
 }
 
@@ -97,7 +67,6 @@ li {
     margin-bottom: var(--spacing-xs);
 }
 
-<<<<<<< HEAD
 
  /* Component Styles */
 a {
@@ -123,20 +92,13 @@ nav {
     padding: var(--spacing-md) var(--spacing-lg);
 }
 
-=======
-/* nav */
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
 nav ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm) var(--spacing-md);
     list-style: none;
-<<<<<<< HEAD
     padding-bottom: var(--spacing-sm);
     margin: 0;
-=======
-    margin-bottom: var(--spacing-lg);
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
 }
 
 nav a {
@@ -145,7 +107,6 @@ nav a {
     transition: color 0.2s;
 }
 
-<<<<<<< HEAD
 /* containers and such */  
 
 body {
@@ -206,115 +167,3 @@ footer p {
     max-width: 1000px;
     margin: 0 auto;
 }
-=======
-nav a:hover {
-    color: var(--color-secondary);
-    text-decoration: underline;
-}
-
-/* banner image */
-header img {
-    display: block;
-    width: 100%;
-    max-width: 1200px;
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--spacing-md);
-}
-
-/* color chip */
-.swatch {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: var(--color-accent);
-    border: 1px solid var(--color-secondary);
-    border-radius: var(--radius-sm);
-    vertical-align: middle;
-}
-
-/* photo next to text */
-article.split {
-    display: flex;
-    gap: var(--spacing-lg);
-    align-items: flex-start;
-    margin-bottom: var(--spacing-lg);
-}
-
-article.split img {
-    display: block;
-    width: 42%;
-    max-width: 480px;
-    border-radius: var(--radius-md);
-}
-
-article.split aside {
-    flex: 1;
-}
-
-/* lazor wiz pic */
-.wiz-pic {
-    display: block;
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto var(--spacing-lg);
-    border-radius: var(--radius-md);
-    box-shadow: 0 2px 8px rgba(2, 1, 34, 0.15);
-}
-
-/* footer */
-footer {
-    margin-top: var(--spacing-xl);
-    padding: var(--spacing-lg);
-    background-color: var(--color-secondary);
-    color: var(--color-text-light);
-    border-radius: var(--radius-md);
-}
-
-footer strong {
-    color: var(--color-highlight);
-}
-
-/* narrow screens */
-@media (max-width: 600px) {
-    body {
-        padding: var(--spacing-md);
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-
-    article.split {
-        flex-direction: column;
-    }
-
-    article.split img {
-        width: 100%;
-    }
-}
-article ul{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-article ul li{
-    background-color: #F5EE9E;
-    text-align: center;
-    border: 2px solid #ce4257;
-    box-shadow: 2px 2px 3px 0 #020122;
-    border-radius: 10px;
-}
->>>>>>> c2c94f5c71ff78560e61baedbe32fc8663d7068a
