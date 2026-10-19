@@ -109,7 +109,7 @@ li {
 header img {
     display: block;
     width: 100%;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
 }
