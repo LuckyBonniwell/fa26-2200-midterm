@@ -152,6 +152,12 @@ nav a {
     color: var(--color-primary);
     text-decoration: none;
     transition: color 0.2s;
+    /* border: 2px solid var(--color-secondary); */
+    padding: 5px;
+    border-radius: 8px;
+}
+nav a:hover {
+    background-color: #020122;
 }
 
 nav a,
