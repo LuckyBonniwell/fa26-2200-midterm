@@ -101,7 +101,6 @@ nav {
     box-sizing: border-box;
 }
 
-/* Website name and logo on the left */
 .nav-branding {
     display: flex;
     align-items: center;
@@ -314,9 +313,10 @@ main article:has(.supplementary-img) {
 
 /* footer */
 footer {
-    background-color: white;
+    background-color: #942911;
     width: 100%;
     padding: var(--spacing-lg);
+    color: white;
 }
 
 footer p {
@@ -324,9 +324,6 @@ footer p {
     margin: 0 auto;
 }
 
-footer strong {
-    color: var(--color-nuetral);
-}
 
 /* narrow screens */
 @media (max-width: 700px) {

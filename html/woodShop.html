@@ -11,20 +11,35 @@
 </head>
 
 <body>
-        <nav>
+<nav>
+    <div class="nav-branding">
+        <img src="images/Sage MM photo.jpg" alt="BTU logo">
+        <span>ATLAS|BTU Lab</span>
+    </div>
+
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="tools.html">Tools</a></li>
-            <li><a href="woodShop.html">Wood Shop</a></li>
-            <li>Lase!rs</li>
-            <li>Electronics</li>
-            <li>Sewing & Textiles</li>
-            <li>3D Printing</li>
-            <li>CNC</li>
+            <!-- tool dropdown menu -->
+            <li class="dropdown">
+    <div class="dropdown-heading">
+        <a href="tools.html">Tools</a>
+        <button class="dropdown-toggle">&#9660;</button>
+    </div>
+
+    <ul class="dropdown-menu">
+        <li><a href="tools.html">General Tool Information</a></li>
+        <li><a href="woodShop.html">Wood Shop</a></li>
+        <li><a href="laser.html">Lasers</a></li>
+        <li><a href="electronics.html">Electronics</a></li>
+        <li><a href="sewingTextiles.html">Sewing &amp; Textiles</a></li>
+        <li><a href="3dPrinters.html">3D Printing</a></li>
+        <li><a href="cnc.html">CNC</a></li>
+    </ul>
+</li>
             <li><a href="mischiefMakers.html">Mischief Makers</a></li>
-            <li>Rules and Policies</li>
-            <li>Workshops</li>
-            <li>Help Us Blow Things Up</li>
+            <li><a href="rulesAndPolicies.html">Rules and Policies</a></li>
+            <li><a href="workshops.html">Workshops</a></li>
+            <li><a href="helpBTU.html">Help Us Blow Things Up</a></li>
         </ul>
     </nav>
 
@@ -92,5 +107,30 @@
     <footer>
         <p>Materials: <strong>BTU LAB IS NOT A FREE SUPPLY STORE</strong>. But there are many ways to barter, including displaying your work in BTU, tagging us in social media, offering workshops, volunteering to organize supplies, and more. If you need something, we ask that you give something in return.</p>
     </footer>
+    <!-- this is just to get the dropdown menu to work -->
+<script>
+    const dropdown = document.querySelector(".dropdown");
+    const toggle = document.querySelector(".dropdown-toggle");
+
+    toggle.addEventListener("click", () => {
+        const isOpen = dropdown.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            dropdown.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.focus();
+        }
+    });
+</script>
     </main>
 </body>
