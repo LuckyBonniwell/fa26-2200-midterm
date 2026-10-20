@@ -8,7 +8,7 @@
     --color-neutral: #942911;
     --color-highlight: #F5EE9E;
 
-    --color-background: color-mix(in srgb, var(--color-neutral) 10%, white);
+    --color-background: color-mix(in srgb, var(--color-highlight) 10%, white);
         --color-text-dark: var(--color-neutral);
         --color-text-light: white;
 
@@ -47,6 +47,7 @@ h2 {
  }
 
 h3 {
+    font-family: "brother-1816", sans-serif;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: var(--spacing-sm);
@@ -54,16 +55,19 @@ h3 {
 }
 
 p {
+    font-family: "brother-1816", sans-serif;
     font-size: 1rem;
     margin-bottom: var(--spacing-md);
 }
 
 ul,
 ol {
+    font-family: "brother-1816", sans-serif;
     padding-left: 1.25rem;
 }
 
 li {
+    font-family: "brother-1816", sans-serif;
     margin-bottom: var(--spacing-xs);
 }
 
@@ -127,15 +131,6 @@ nav > ul {
     margin: 0;
 }
 
-/* nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm) var(--spacing-md);
-    list-style: none;
-    padding-bottom: var(--spacing-sm);
-    margin: 0;
-} */
-
 nav a {
     color: var(--color-primary);
     text-decoration: none;
@@ -159,7 +154,7 @@ main {
     padding: var(--spacing-xl);
     border-radius: var(--radius-md);
     background-color: white;
-    box-shadow: 0 2px 6px var(--color-neutral);
+    box-shadow: 0 2px 6px var(--color-primary);
 }
 
 main article {
@@ -174,28 +169,104 @@ header {
     margin-bottom: var(--spacing-xl);
 }
 
-header.h1 {
-    padding: var(--spacing-md);
-    background-color: white;
-    border-radius: var(--radius-md);
-}
-
+/* im gonna be lazy and just make a bunch of swatch classes */
 .swatch {
     display: inline-block;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     background-color: var(--color-highlight);
     border: 1px solid var(--color-secondary);
     border-radius: var(--radius-sm);
     vertical-align: middle;
+    margin: 1.25rem;
 }
+
+.swatch-wood {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+.swatch-laser {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+.swatch-electronics {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+.swatch-sewing {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+.swatch-3d {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+.swatch-cnc {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-highlight);
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    vertical-align: middle;
+    margin: 1.25rem;
+}
+
+
+
+
 
 .banner-img {
   width: 100%;
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.tool-title {
+    background-color: white;
+    max-width: 90%;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-xl);
+    box-shadow: 0 2px 6px var(--color-primary);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
 }
 
 main article:has(.supplementary-img) {
@@ -222,6 +293,25 @@ main article:has(.supplementary-img) {
     font-size: 1.25rem;
 }
 
+/* making the materials list responsive */
+.materials-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm) var(--spacing-xl);
+    list-style-position: inside;
+    padding: 0;
+}
+@media (max-width: 900px) {
+    .materials-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .materials-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* footer */
 footer {
     background-color: white;
@@ -233,18 +323,10 @@ footer p {
     max-width: 1000px;
     margin: 0 auto;
 }
-/* footer {
-    margin-top: var(--spacing-xs);
-    padding: var(--spacing-lg);
-    background-color: var(--color-secondary);
-    color: var(--color-text-light);
-    border-radius: var(--radius-md);
-    margin: 20px;
-}
 
 footer strong {
-    color: var(--color-highlight);
-} */
+    color: var(--color-nuetral);
+}
 
 /* narrow screens */
 @media (max-width: 700px) {
