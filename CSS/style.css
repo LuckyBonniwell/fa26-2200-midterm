@@ -208,7 +208,7 @@ iframe {
 .banner-img {
     display: block;
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     object-position: center;
 }
@@ -266,11 +266,14 @@ body.mischief-makers .image-container {
 }
 
 body.mischief-makers .image-container img {
-    display: block;
     width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
-body.mischief-makers .image-text {
+/* body.mischief-makers .image-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -288,7 +291,7 @@ body.mischief-makers header img {
     height: auto;
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
-}
+} */
 
 body.mischief-makers main article {
     display: flex;
