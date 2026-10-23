@@ -117,6 +117,11 @@ nav {
     width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
     box-sizing: border-box;
+    /* sticky nav: stays at the top of the screen while you scroll */
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 6px #0002;
 }
 
 .nav-branding {
@@ -373,9 +378,21 @@ footer p {
     h1 { font-size: 2rem; }
     h2 { font-size: 1.5rem; }
 
-    nav ul {
+    nav {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    nav > ul {
+        justify-content: flex-start;
+        gap: 0 var(--spacing-xs);
+        font-size: 0.85rem;
+    }
+
+    nav a {
+        padding: 2px 4px;
     }
 
     main { padding: var(--spacing-md); }
@@ -468,3 +485,113 @@ footer p {
     padding: 0rem;
     margin: 0rem;
 }
+
+/* ---------- homepage comic look ---------- */
+/* only the homepage gets this (body class="home"), the other pages stay the same for now.
+   borders + hard shadows are the same idea as the mischief makers cards */
+
+body.home {
+    /* little comic dots on the background */
+    background-image: radial-gradient(rgba(2, 1, 34, 0.15) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+}
+
+body.home h1,
+body.home h2 {
+    /* font not picked yet, just using the site font for now */
+    font-weight: 400;
+    color: var(--color-secondary);
+}
+
+body.home header {
+    position: relative;
+    margin-bottom: 0;
+}
+
+body.home .hero-img {
+    height: 460px;
+    object-position: center 60%;
+    border-bottom: 4px solid var(--color-secondary);
+}
+
+/* title sits on top of the bottom of the hero like a comic caption box */
+body.home header h1 {
+    display: inline-block;
+    margin: -1.75rem 0 0;
+    position: relative;
+    padding: 0.25rem 1.25rem;
+    font-size: 3.5rem;
+    background-color: var(--color-highlight);
+    border: 4px solid var(--color-secondary);
+    box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+body.home main {
+    max-width: 1100px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+body.home .intro-box {
+    font-size: 1.2rem;
+    padding: var(--spacing-lg);
+    background-color: white;
+    border: 3px solid var(--color-secondary);
+    box-shadow: 6px 6px 0 var(--color-primary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* each WHO/HOW/WHEN/WHERE/WHAT section is a comic panel */
+body.home main article {
+    padding: var(--spacing-md);
+    background-color: white;
+    border: 3px solid var(--color-secondary);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* switch up the shadow color so it isn't all red */
+body.home main article:nth-of-type(2) { box-shadow: 8px 8px 0 var(--color-primary); }
+body.home main article:nth-of-type(3) { box-shadow: 8px 8px 0 #ffd23f; }
+body.home main article:nth-of-type(4) { box-shadow: 8px 8px 0 var(--color-primary); }
+
+body.home .supplementary-img {
+    border: 3px solid var(--color-secondary);
+    border-radius: 0;
+}
+
+body.home main p {
+    font-size: 1.1rem;
+}
+
+body.home h2 {
+    display: inline-block;
+    margin-top: 0;
+    padding: 0 0.5rem;
+    background-color: var(--color-highlight);
+    border: 3px solid var(--color-secondary);
+}
+
+/* text was stuck at the top of each panel, center it next to the photo */
+body.home .photo-text {
+    align-items: center;
+}
+
+/* map for WHERE (pinter asked for a picture there) */
+body.home .map {
+    width: min(400px, 40%);
+    height: 260px;
+    flex-shrink: 0;
+    border: 3px solid var(--color-secondary);
+}
+
+body.home footer {
+    border-top: 4px solid var(--color-secondary);
+}
+
+@media (max-width: 700px) {
+    body.home .hero-img { height: 260px; }
+    body.home header h1 { font-size: 2rem; margin-top: -1.75rem; }
+    body.home .map { width: 100%; }
+    body.home main { max-width: 100%; }
+}
+
