@@ -160,3 +160,24 @@
     .site-page main .supplementary-img.tile { width: 8rem; max-width: 50%; }
     .site-page.tool-page main .materials-list { grid-template-columns: 1fr; }
 }
+
+/* "Psst... hover over a panel!": a tilted speech bubble under the tool strip with a hand-drawn arrow up at the
+   gray panels, so a visitor knows they wake up on hover (dash, 10-25). It just sits there (no fade).
+   Computer screens only: hidden on touch screens and at phone width, where only the page's own panel shows. */
+.th-header { position: relative; }
+.th-header .hover-hint {
+    position: absolute; z-index: 3; pointer-events: none;
+    right: calc(5% + 10px); top: calc(clamp(210px, 24vw, 300px) + 2.1rem);
+    margin: 0; padding: .45rem .9rem; rotate: -4deg;
+    background: #fff; border: 3px solid var(--ink, #020122); border-radius: 999px;
+    font-family: var(--font-primary, 'brother-1816', sans-serif); font-weight: 700; font-size: .95rem; line-height: 1.2;
+    color: var(--ink, #020122); white-space: nowrap;
+}
+.th-header .hover-hint .hh-arrow { position: absolute; right: 30%; bottom: calc(100% - 2px); width: 40px; height: 38px; overflow: visible; }
+/* narrower computer screens: the bubble moves under the title, on the right. Above 1150px it stays beside the
+   title on every tool page, overlapping the Sewing & Textiles title's shadow a little (dash, 10-25: "don't make
+   it different on the sewing page. Just make it over lap onto it if need be") */
+@media (max-width: 1150px) {
+    .th-header .hover-hint { position: relative; right: auto; top: auto; display: block; width: fit-content; margin: 1.9rem 1.5rem 0 auto; }
+}
+@media (hover: none), (pointer: coarse), (max-width: 700px) { .th-header .hover-hint { display: none; } }

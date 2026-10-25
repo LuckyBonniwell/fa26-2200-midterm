@@ -9,6 +9,8 @@
     height: 1150vh; view-timeline: --intro block;
 }
 .vd .stage, .vd .mascot { transition: --t 0.52s cubic-bezier(0.2, 0.7, 0.3, 1); }
+/* the slow BTU LAB glide (js/intro-stops.js) is already smooth; the smoothing's ease-out would add a pause */
+html.intro-gliding .vd .stage, html.intro-gliding .vd .mascot { transition: none; }
 .vd .disc {
     position: absolute; z-index: var(--z); left: var(--cx); top: var(--cy);
     width: var(--size); aspect-ratio: 1; border-radius: 50%; border: 1.2vmin solid var(--ink);
