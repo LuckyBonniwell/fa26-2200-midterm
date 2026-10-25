@@ -1,0 +1,21 @@
+/* Cushion: ordinary scrolling with short CSS-only visual landing zones (BLOW, THINGS, UP each hold briefly).
+   No wheel/touch interception; a strong swipe can move through more than one beat. */
+.intro.vd.cushion { height: 1270vh; }
+/* New contain distance is 1170vh. Keep the original motion distances, adding 40vh of
+   unchanged BLOW, THINGS and UP frames plus the original 100vh final BTU hold. */
+@keyframes progD {
+    0% { --t: 0; }
+    42.22222% { --t: .52; }
+    45.64103% { --t: .52; }
+    60.25641% { --t: .70; }
+    63.67521% { --t: .70; }
+    78.29060% { --t: .88; }
+    81.70940% { --t: .88; }
+    91.45299%, 100% { --t: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .intro.vd.cushion { height: auto; }
+}
+@supports not (animation-timeline: view()) {
+    .intro.vd.cushion { height: auto; }
+}

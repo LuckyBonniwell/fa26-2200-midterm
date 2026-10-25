@@ -1,0 +1,162 @@
+/* The interior pages use the homepage's comic ink, paper, hard shadows and footer.
+   Keep page copy in the HTML; this sheet changes presentation only. */
+.site-page {
+    --page-shadow: var(--crimson);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--ink);
+}
+.site-page nav[aria-label="Main"] {
+    z-index: 1000;
+}
+.site-page > header:not(.th-header) {
+    position: relative;
+    max-width: 74rem;
+    margin: 2rem auto 3.5rem;
+    padding: 0 1rem;
+    text-align: left;
+}
+.site-page > header:not(.th-header) h1 {
+    position: relative;
+    display: table;
+    max-width: calc(100% - 1rem);
+    margin: -2.25rem 0 0 1.1rem;
+    padding: .35rem .8rem;
+    background: var(--sun);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--crimson);
+    font: 400 clamp(1.55rem, 4vw, 2.5rem)/1.18 var(--display);
+    text-align: left;
+}
+/* Keep the team's centered, overlapping, area-coloured tool hero title intact. */
+.site-page > .th-header { text-align: center; margin: 0 0 1rem; }
+.site-page > .th-header .tool-hero { border-bottom: 4px solid var(--ink); }
+
+.site-page main {
+    width: calc(100% - 3rem);
+    max-width: 74rem;
+    margin: 0 auto 4rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+.site-page main > article,
+.site-page main > section,
+.site-page.tools-index main > p {
+    position: relative;
+    margin: 0 0 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: 9px 9px 0 var(--page-shadow);
+    overflow-wrap: anywhere;
+}
+.site-page main > article:nth-of-type(3n+2) { --page-shadow: var(--teal); }
+.site-page main > article:nth-of-type(3n) { --page-shadow: var(--sun); }
+.site-page main > h2,
+.site-page main > h1 {
+    display: table;
+    max-width: 100%;
+    padding: .25rem .65rem;
+    color: var(--ink);
+    background: var(--sun);
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--teal);
+    font-family: var(--display);
+    line-height: 1.2;
+}
+.site-page main h2,
+.site-page main h3 { color: var(--ink); }
+.site-page main > article h2,
+.site-page main > article h3 { margin-top: 0; }
+.site-page main a,
+.site-page main a:visited { color: var(--ink); text-decoration: underline 2px var(--crimson); text-underline-offset: 3px; }
+.site-page main a:hover,
+.site-page main a:focus-visible { background: var(--sun); }
+.site-page main .supplementary-img,
+.site-page main .wiz-pic {
+    border: 3px solid var(--ink);
+    border-radius: 0;
+    box-shadow: 6px 6px 0 var(--teal);
+}
+.site-page main .supplementary-img { max-width: 40%; }
+/* Faculty: the small square resource tiles stay small instead of stretching to 40% */
+.site-page main .supplementary-img.tile { width: 10rem; max-width: 30%; aspect-ratio: 1; object-fit: cover; flex: none; }
+.site-page main .wizard-addresses { overflow-wrap: anywhere; }
+.site-page main .photo-text { display: flex; align-items: flex-start; gap: 1.5rem; }
+.site-page main .article-text { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.site-page main .swatch,
+.site-page main [class^="swatch-"] { border: 2px solid var(--ink); }
+.site-page.tool-page main {
+    padding: clamp(1rem, 3vw, 2rem);
+    background: #fff;
+    border: 3px solid var(--ink);
+    box-shadow: 9px 9px 0 var(--teal);
+}
+.site-page.tool-page main > article,
+.site-page.tool-page main > p {
+    margin: 0 0 2rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+.site-page.tool-page main > article:last-child { margin-bottom: 0; }
+.site-page.tool-page main .swatch-tools {
+    background: #2bb24c;
+    width: 3rem;
+    height: 3rem;
+    margin: 0 1rem 0 0;
+}
+.site-page.tool-page main .color-sentence {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.site-page.tool-page main .color-sentence .swatch { flex: none; }
+.site-page.tool-page main .materials-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .3rem 2rem;
+    padding-left: 1.25rem;
+}
+.site-page main iframe { max-width: 100%; border: 3px solid var(--ink); }
+.site-page #calendar, .site-page #wizards { scroll-margin-top: 8rem; } /* clears the sticky nav (two rows on phones) */
+/* Staff portraits keep their existing responsive layout and lazy loading. */
+.site-page.mischief-makers main article {
+    margin: 0 0 2rem;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: #fff;
+    border: 3px solid var(--ink);
+    border-radius: 0;
+    box-shadow: 9px 9px 0 var(--page-shadow);
+}
+.site-page.mischief-makers main article img {
+    display: block;
+    width: min(400px, 40%);
+    max-width: 40%;
+    height: auto;
+    padding: 0;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--teal);
+}
+.site-page.mischief-makers main article aside ul li { border: 2px solid var(--ink); border-radius: 0; box-shadow: 4px 4px 0 var(--teal); }
+.site-page.mischief-makers main article aside a { overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+    .site-page.tool-page main .materials-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+    .site-page > header:not(.th-header):not(.bp) { margin: 1rem auto 3rem; }
+    .site-page > header:not(.th-header):not(.bp) h1 { margin-left: .4rem; }
+    .site-page main { width: calc(100% - 2rem); }
+    .site-page main .photo-text,
+    .site-page main article:has(.supplementary-img) { flex-direction: column; }
+    .site-page main .supplementary-img,
+    .site-page.mischief-makers main article img { width: 100%; max-width: 100%; }
+    .site-page main .supplementary-img.tile { width: 8rem; max-width: 50%; }
+    .site-page.tool-page main .materials-list { grid-template-columns: 1fr; }
+}

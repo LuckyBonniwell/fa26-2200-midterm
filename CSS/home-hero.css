@@ -1,0 +1,50 @@
+/* home-hero.css: the homepage banner below the scrolling intro, not the intro animation.
+   Controls the explosion image's desktop and phone sizing, the black divider lines,
+   the tilted yellow "Blow. Things. Up." caption, and the description box below it.
+   Loads after home.css and the intro styles so these final banner rules take priority. */
+
+.intro.vd + #content .hero { border-top: 0; }
+
+.intro.vd + #content .hero-art {
+    width: 100%; height: auto; aspect-ratio: 3 / 1;
+    /* never taller than the screen leaves room for, so the caption and copy start above the fold */
+    max-height: min(calc(100svh - var(--nav-h) - 11rem), 40rem);
+    object-fit: cover; object-position: 50% 50%;
+    background: #1d9be3;
+    border-top: 4px solid var(--ink);      /* black rule between the intro and the hero art (dash 10-25) */
+    border-bottom: 4px solid var(--ink);
+}
+/* intro skipped: the nav's own bottom rule already separates it from the art */
+.no-intro .intro.vd + #content .hero-art { border-top: 0; }
+@media (max-width: 700px) {
+    .intro.vd + #content .hero-art { aspect-ratio: 8 / 5; height: auto; max-height: 26rem; }
+}
+
+/* same family as the intro's BLOW. THINGS. UP. and the panel tags (Bowlby One), same tilt as the tags */
+.intro.vd + #content .hero-caption {
+    position: relative; z-index: 1;
+    width: fit-content; max-width: calc(100% - 2rem);
+    margin: calc(-0.36 * clamp(3rem, 6.4vw, 5.25rem)) auto 0;   /* hero edge crosses the upper third, not dead centre */
+    padding: 0.15em 0.6em 0.2em;
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(1.55rem, 4.4vw, 3.4rem); line-height: 1.1; letter-spacing: 0.01em;
+    text-transform: uppercase; text-align: center; white-space: nowrap;
+    color: var(--ink); background: var(--color-highlight);   /* earlier butter yellow, dash 10-24 */
+    border: 3px solid var(--ink); box-shadow: 7px 7px 0 var(--crimson);
+    rotate: -2deg;                                            /* same tilt as the WHO/HOW tags */
+}
+
+.intro.vd + #content .hero-description {
+    max-width: min(72rem, calc(100% - 3rem)); margin: 2.5rem auto 0;   /* earlier width, dash 10-24 */
+    padding: 1.1rem 1.5rem;
+    font-size: 1.2rem; line-height: 1.55; text-wrap: pretty;
+    background: #fff; border: 3px solid var(--ink); box-shadow: 7px 7px 0 var(--teal);
+}
+
+@media (max-width: 700px) {
+    .intro.vd + #content .hero-caption { box-shadow: 5px 5px 0 var(--crimson); }
+    .intro.vd + #content .hero-description {
+        max-width: none; margin: 1.75rem calc(1rem + 5px) 0 1rem;   /* right margin absorbs the shadow */ padding: 1rem 1.1rem; font-size: 1.0625rem;
+        box-shadow: 5px 5px 0 var(--teal);
+    }
+}

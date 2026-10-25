@@ -3,92 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blow things up</title>
-    <link rel="preconnect" href="https://use.typekit.net" />
-    <link rel="stylesheet" href="https://use.typekit.net/wij1sxx.css" />
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="icon" href="images/btu-logo.jpg" type="image/jpeg">
+    <title>BTU Lab | Blow. Things. Up.</title>
+    <link rel="preconnect" href="https://use.typekit.net">
+    <link rel="stylesheet" href="https://use.typekit.net/wij1sxx.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap">
+    <script>
+        /* before the first paint: apply a saved "skip intro from now on" choice, and count homepage visits so the
+           skip buttons wait for the end of the intro on a first visit (the rest is in js/intro-pref.js) */
+        (function () {
+            var root = document.documentElement;
+            try {
+                var store = window.localStorage;
+                if (store.getItem('btu-skip-intro') === '1') root.classList.add('no-intro');
+                var visits = parseInt(store.getItem('btu-home-visits'), 10) || 0;
+                root.classList.add(visits > 0 ? 'intro-returning' : 'intro-first');
+                store.setItem('btu-home-visits', String(visits + 1));
+            } catch (e) {
+                root.classList.add('intro-returning');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="../CSS/style.css?v=final-7">
+    <link rel="stylesheet" href="../CSS/home.css?v=final-7">
+    <link rel="stylesheet" href="../CSS/intro-base.css?v=final-7">
+    <link rel="stylesheet" href="../CSS/introD.css?v=final-7">
+    <link rel="stylesheet" href="../CSS/introD-cushion.css?v=final-7">
+    <link rel="stylesheet" href="../CSS/home-hero.css?v=final-7">
 </head>
-<body class="home">
-<nav>
-    <div class="nav-branding">
-        <img src="images/Sage MM photo.jpg" alt="BTU logo">
-        <span>ATLAS|BTU Lab</span>
-    </div>
+<body class="comic">
+<nav aria-label="Main">
+    <a class="nav-branding" href="index.html">
+        <span class="nav-mark" aria-hidden="true"><span class="nav-mark-spin"><span class="sh shadow"></span><span class="sh ink"></span><span class="sh fill"></span></span><span class="nav-mark-text">BTU<br>LAB</span></span>
+        <span>BTU Lab</span>
+    </a>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <!-- tool dropdown menu -->
-            <li class="dropdown">
-    <div class="dropdown-heading">
-        <a href="tools.html">Tools</a>
-        <button class="dropdown-toggle">&#9660;</button>
-    </div>
-
-    <ul class="dropdown-menu">
-        <li><a href="tools.html">General Tool Information</a></li>
-        <li><a href="woodShop.html">Wood Shop</a></li>
-        <li><a href="lasers.html">Lasers</a></li>
-        <li><a href="electronics.html">Electronics</a></li>
-        <li><a href="sewingTextiles.html">Sewing &amp; Textiles</a></li>
-        <li><a href="3dPrinters.html">3D Printing</a></li>
-        <li><a href="cnc.html">CNC</a></li>
-    </ul>
-</li>
-            <li><a href="mischiefMakers.html">Mischief Makers</a></li>
-            <li><a href="rulesAndPolicies.html">Manifesto</a></li>
-            <li><a href="workshops.html">Whens Happening?</a></li>
-            <li><a href="helpBTU.html">Help the BTU</a></li>
-        </ul>
-    </nav>
-    <header>
-        <img src="images/home-hero-boom.jpg" alt="Cartoon comic-book explosion with smoke clouds and flying stars" class="banner-img hero-img">
-        <h1>Blow. Things. Up.</h1>
-    </header>
-    <main>
-    <p class="intro-box"> The ATLAS BTU Lab is an inclusive community makerspace facilitating projects at the intersection of Art, Design, Engineering and Architecture. It serves multiple functions as a general workspace, and workshop host. </p>
-        <article class="photo-text">
-            <img src="images/home-who-photo.jpg" alt="BTU staff posing in the lab, a few of them holding a big patterned snake" class="supplementary-img">
-            <div class="article-text">
-           <h2>WHO?</h2>
-            <p>Anyone with a BuffOne can gain access to BTU. Our goal is to provide the most diverse, inclusive environment for makers of all types in a highly experimental and productive space.</p>
+    <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <!-- tool dropdown menu -->
+        <li class="dropdown">
+            <div class="dropdown-heading">
+                <a href="tools.html">Tools</a>
+                <button class="dropdown-toggle" aria-expanded="false" aria-label="Show tool pages">&#9660;</button>
             </div>
-        </article>
+            <ul class="dropdown-menu">
+                <li><a href="tools.html">General Tool Information</a></li>
+                <li><a href="woodShop.html">Wood Shop</a></li>
+                <li><a href="lasers.html">Lasers</a></li>
+                <li><a href="electronics.html">Electronics</a></li>
+                <li><a href="sewingTextiles.html">Sewing &amp; Textiles</a></li>
+                <li><a href="3dPrinters.html">3D Printing</a></li>
+                <li><a href="cnc.html">CNC</a></li>
+            </ul>
+        </li>
+        <li><a href="mischiefMakers.html">Mischief Makers</a></li>
+        <li><a href="rulesAndPolicies.html">Manifesto</a></li>
+        <li><a href="workshops.html">When's Happening?</a></li>
+        <li><a href="helpBTU.html">Help the BTU</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+    </ul>
+</nav>
 
-    <article class="photo-text">
-        <img src="images/home-how-photo.jpg" alt="Someone in a dust mask and ear protection holding a power tool over their head" class="supplementary-img">
-        <div class="article-text">
-            <h2>HOW?</h2>
-            <p>New members attend a 20 minute general orientation covering community expectations, safety and equipment.</p>
+<main>
+    <div class="intro vd cushion">
+        <!-- version D: C's word transitions and CSS inertia with B's shock-ring explosion. -->
+        <div class="skip-wrap"><a class="skip-intro" href="#content">Skip the intro</a><button class="skip-intro skip-forever" type="button" hidden>Skip intro from now on</button></div>
+        <div class="stage">
+            <div class="bomb-fit" aria-hidden="true">
+                <!-- the bomb, after dash's 10-23 sketch: round body, cap on the upper right, and a fuse that rises,
+                     arches over to the right, drops down and curls up at the end -->
+                <div class="bomb-art k">
+                    <div class="bomb"></div>
+                    <svg class="fuse" viewBox="0 0 780 520" focusable="false">
+                        <defs>
+                            <pattern id="rope" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                <rect width="9" height="9" fill="#c8a165"/>
+                                <rect width="4.5" height="9" fill="#8a6534"/>
+                            </pattern>
+                        </defs>
+                        <path class="k" pathLength="100" stroke="#020122" stroke-width="21" d="M256 186 C 262 130, 300 78, 370 66 C 450 52, 520 90, 548 150 C 568 194, 600 226, 648 222 C 684 219, 706 196, 712 172"/>
+                        <path class="k" pathLength="100" stroke="url(#rope)" stroke-width="13" d="M256 186 C 262 130, 300 78, 370 66 C 450 52, 520 90, 548 150 C 568 194, 600 226, 648 222 C 684 219, 706 196, 712 172"/>
+                    </svg>
+                    <div class="cap"></div>
+                    <div class="spark k"><i></i></div>
+                </div>
+            </div>
+            <div aria-hidden="true">
+                <div class="ring r1 k"></div><div class="ring r2 k"></div><div class="ring r3 k"></div>
+                <div class="disc d-red k"></div>
+                <div class="puff p1 k"></div><div class="puff p2 k"></div><div class="puff p3 k"></div><div class="puff p4 k"></div>
+                <div class="shard s1 k"></div><div class="shard s2 k"></div><div class="shard s3 k"></div><div class="shard s4 k"></div><div class="shard s5 k"></div><div class="shard s6 k"></div>
+                <div class="disc d-sun k"></div>
+                <div class="wipe wipe-red k"></div>
+                <div class="wipe wipe-ink k"></div>
+                <div class="plate p-teal k"><div class="rays"><i></i><i></i></div></div>
+            </div>
+            <h1 class="slam" aria-label="Blow. Things. Up.">
+                <span class="w w1 k" aria-hidden="true">Blow.</span>
+                <span class="w w2 k" aria-hidden="true">Things.</span>
+                <span class="w w3 k" aria-hidden="true">Up.</span>
+            </h1>
+            <div class="cue k" aria-hidden="true"></div>
         </div>
-    </article>
+        <div class="mascot" aria-hidden="true">
+            <div class="badge">
+                <div class="badge-in k">
+                    <div class="spin"><div class="pulse"><div class="sh shadow"></div><div class="sh ink"></div><div class="sh fill"></div></div></div>
+                    <p class="badge-text">BTU<br>LAB</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <article class="photo-text">
-        <img src="images/home-when-photo.jpg" alt="People spread across the lab's tables during an open session" class="supplementary-img">
-        <div class="article-text">
-            <h2>WHEN?</h2>
-            <p>The orientation* schedule, and all scheduled events can be found on the <a href="labCalander.html">BTU Calendar</a>. [*Some things involve separate orientations...like lasers and stuff. Check the calendar and the pages above for your interests.]</p>
-        </div>
-    </article>
+    <div id="content">
+        <section class="hero" aria-label="About the BTU Lab">
+            <picture>
+                <source media="(max-width: 700px)" srcset="images/home-hero-clean-phone.jpg 1200w" sizes="100vw">
+                <img class="hero-art" src="images/home-hero-clean-1600.jpg"
+                     srcset="images/home-hero-clean-1600.jpg 1600w, images/home-hero-clean-3000.jpg 3000w" sizes="100vw"
+                     width="3000" height="1000"
+                     alt="BTU Lab diamond logo inside a layered coral and yellow comic explosion, with teal halftone rays and clouds">
+            </picture>
+            <div class="hero-caption" aria-hidden="true">Blow. Things. Up.</div>
+            <p class="hero-description">The ATLAS BTU Lab is an inclusive community makerspace facilitating projects at the intersection of Art, Design, Engineering and Architecture. It serves multiple functions as a general workspace, and workshop host.</p>
+        </section>
 
-    <article class="photo-text">
-        <iframe class="map" src="https://maps.google.com/maps?q=1125%2018th%20St%2C%20Boulder%2C%20CO%2080309&amp;z=16&amp;output=embed" title="Map of the BTU Lab at 1125 18th St, Boulder" loading="lazy"></iframe>
-        <div class="article-text">
-            <h2>WHERE?</h2>
-            <p>320 UCB <br> 1125 18th St <br>Boulder, CO 80309 </p>
-        </div>
-    </article>
+        <section class="panels" aria-label="Who, how, when, what and where">
+            <article class="panel who">
+                <h2 class="tag">WHO?</h2>
+                <img class="panel-art" src="images/home-who-photo.jpg" width="960" height="684" alt="BTU staff posing in the lab, a few of them holding a big patterned snake">
+                <div class="panel-text">
+                    <p>Anyone* can gain access to BTU. Our goal is to provide the most diverse, inclusive environment for makers of all types in a highly experimental and productive space.</p>
+                    <p class="note">*Due to increased campus security, we are currently unable to sponsor BuffOne Guest cards.</p>
+                </div>
+            </article>
 
-    <article class="photo-text">
-        <img src="images/home-what-photo.jpg" alt="A few people crouched on the floor around a glowing light-up project" class="supplementary-img">
-        <div class="article-text">
-            <h2>Uh...WHAT?</h2>
-            <p>Have any questions? Email BTU Lab at <a href="mailto:atlasbtulab@gmail.com">atlasbtulab@gmail.com</a>. </p>
-        </div>
-    </article>
-    <a href="https://www.instagram.com/btulab_cu/?hl=en"><img src="images/instagram-icon.png" alt="BTU Lab on Instagram" class="insta-icon"></a>
+            <article class="panel how">
+                <h2 class="tag">HOW?</h2>
+                <img class="panel-art" src="images/home-how-photo.jpg" width="960" height="656" alt="Someone in a dust mask and ear protection holding a power tool over their head">
+                <div class="panel-text">
+                    <p>New members attend a 20 minute general orientation covering community expectations, safety and equipment.</p>
+                </div>
+            </article>
+
+            <article class="panel when">
+                <h2 class="tag">WHEN?</h2>
+                <img class="panel-art" src="images/home-when-photo.jpg" width="960" height="698" alt="People spread across the lab's tables during an open session">
+                <div class="panel-text">
+                    <p>The orientation* schedule, and all scheduled events can be found on the <a href="workshops.html#calendar">BTU Calendar</a>.</p>
+                    <p class="note">Some things involve separate orientations...like lasers and stuff. Check the calendar and the pages above for your interests.</p>
+                </div>
+            </article>
+
+            <article class="panel what wood-feature">
+                <h2 class="tag">Uh..WHAT?</h2>
+                <div class="what-visual">
+                    <img class="panel-art" src="images/wood-shop-photo.jpg" width="960" height="834" alt="Sculptural piece of wood">
+                    <a class="wood-cta" href="woodShop.html">Check out the wood shop.</a>
+                </div>
+                <div class="panel-text">
+                    <p>Questions: email BTU Lab at <a href="mailto:atlasbtulab@gmail.com">atlasbtulab@gmail.com</a>.</p>
+                </div>
+            </article>
+
+            <article class="panel where">
+                <div class="panel-text">
+                    <h2 class="tag">And, finally...WHERE?</h2>
+                    <address>320 UCB<br>1125 18th St<br>Boulder, CO 80309</address>
+                </div>
+                <iframe src="https://maps.google.com/maps?q=1125%2018th%20St%2C%20Boulder%2C%20CO%2080309&amp;z=16&amp;output=embed"
+                        title="Map of 1125 18th St, Boulder, CO 80309" loading="lazy"></iframe>
+            </article>
+        </section>
+    </div>
 </main>
-<footer>
-    <p>Materials: BTU LAB IS NOT A FREE SUPPLY STORE. But there are many ways to barter, including displaying your work in BTU, tagging us in social media, offering workshops, volunteering to organize supplies, and more. If you need something, we ask that you give something in return.</p>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a class="footer-logo" href="index.html"><img src="images/btu-logo-square.jpg" width="353" height="349" alt="BTU Lab home"></a>
+            <p class="footer-tagline">Blow. Things. Up.</p>
+        </div>
+        <nav aria-label="Footer">
+            <p class="footer-label">Explore</p>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mischiefMakers.html">Mischief Makers</a></li>
+                <li><a href="rulesAndPolicies.html">Manifesto</a></li>
+                <li><a href="workshops.html">When's Happening?</a></li>
+                <li><a href="helpBTU.html">Help the BTU</a></li>
+                <li><a href="faculty.html">Faculty</a></li>
+            </ul>
+        </nav>
+        <nav aria-label="Tool pages">
+            <p class="footer-label">Tools</p>
+            <ul>
+                <li><a href="tools.html">General Tool Information</a></li>
+                <li><a href="woodShop.html">Wood Shop</a></li>
+                <li><a href="lasers.html">Lasers</a></li>
+                <li><a href="electronics.html">Electronics</a></li>
+                <li><a href="sewingTextiles.html">Sewing &amp; Textiles</a></li>
+                <li><a href="3dPrinters.html">3D Printing</a></li>
+                <li><a href="cnc.html">CNC</a></li>
+            </ul>
+        </nav>
+        <div class="footer-visit">
+            <p class="footer-label">Visit</p>
+            <address>320 UCB<br>1125 18th St<br>Boulder, CO 80309<br><a href="mailto:atlasbtulab@gmail.com">atlasbtulab@gmail.com</a></address>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 ATLAS BTU Lab</p>
+        <div class="footer-actions">
+            <a class="intro-replay" href="index.html" data-intro-replay hidden>Bring back the intro</a>
+            <a class="insta-link" href="https://www.instagram.com/btulab_cu/?hl=en"><img src="images/instagram-icon.png" alt="BTU Lab on Instagram" class="insta-icon"></a>
+        </div>
+    </div>
 </footer>
 
 <!-- this is just to get the dropdown menu to work -->
@@ -116,5 +248,6 @@
         }
     });
 </script>
+<script src="js/intro-pref.js?v=final-7" defer></script>
 </body>
 </html>

@@ -1,0 +1,166 @@
+/* extraHero.css: the hero for Mischief Makers, Manifesto, What's Happening, Help BTU and the
+   BTU Calendar. a shop pegboard with painted tool outlines, and the title hung on it
+   as a blueprint sheet with dimension lines and one drafted object per page.
+   Loads after site-pages.css. Only the original H1 is text; all drawings are aria-hidden.
+   Motion: one swing on load, plus one small loop in the drawing; transform-only. */
+
+.site-page > header.bp.bp {
+    --board: #d8b88e;
+    --line: rgb(255 248 231 / .85);
+    --sheet: #17435f;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: calc(100% - 3rem);
+    max-width: 74rem;
+    min-height: clamp(16rem, 28vw, 21rem);
+    margin: 2.25rem auto 3.5rem;
+    padding: 3.9rem 1.25rem 2.4rem;
+    overflow: hidden;
+    text-align: left;
+    background:
+        radial-gradient(circle, rgb(2 1 34 / .55) 0 2.6px, transparent 3.1px) 11px 11px / 26px 26px,
+        linear-gradient(170deg, rgb(255 255 255 / .18), transparent 60%),
+        var(--board);
+    border: 4px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--tone);
+}
+.site-page > header.bp.bp::before,
+.site-page > header.bp.bp::after { content: none; }
+.bp.p-staff     { --tone: #4fa9c9; }
+.bp.p-manifesto { --tone: #ec6f7d; }
+.bp.p-events    { --tone: #ffd23f; }
+.bp.p-help      { --tone: var(--rust); }
+.bp.p-faculty   { --tone: var(--teal); }
+
+/* ---- pegboard tools (union outline: shadow, ink stroke, then colour on top) ---- */
+.bp .rack { position: absolute; top: 5%; z-index: 0; height: 90%; width: auto; }
+.bp .rack.left  { left: 0; }
+.bp .rack.right { right: 0; }
+.bp .t-shadow { fill: var(--ink); opacity: .9; }
+.bp .t-stroke { fill: var(--ink); stroke: var(--ink); stroke-width: 9; stroke-linejoin: round; }
+.bp .t-fill   { fill: var(--tone); }
+.bp .hole     { fill: var(--board); stroke: var(--ink); stroke-width: 4; stroke-linejoin: round; }
+.bp .detail   { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.bp .peg      { fill: var(--ink); }
+
+/* ---- the blueprint sheet hung on a peg ---- */
+.bp .sheet {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(7rem, 14vw, 10.5rem);
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    width: min(46rem, 57%);
+    padding: clamp(1.6rem, 3.2vw, 2.4rem) clamp(1.6rem, 3.2vw, 2.6rem) clamp(2rem, 3.6vw, 2.8rem) clamp(2.2rem, 4vw, 3.2rem);
+    color: #fff8e7;
+    background:
+        linear-gradient(rgb(255 255 255 / .16) 1.5px, transparent 1.5px) -1px -1px / 96px 96px,
+        linear-gradient(90deg, rgb(255 255 255 / .16) 1.5px, transparent 1.5px) -1px -1px / 96px 96px,
+        linear-gradient(rgb(255 255 255 / .07) 1px, transparent 1px) -1px -1px / 24px 24px,
+        linear-gradient(90deg, rgb(255 255 255 / .07) 1px, transparent 1px) -1px -1px / 24px 24px,
+        var(--sheet);
+    border: 4px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    transform-origin: 50% -2.6rem;
+    rotate: -1.5deg;
+    animation: bp-swing 1.6s cubic-bezier(.3, .6, .4, 1) both;
+}
+.bp .sheet::before {                       /* string from both top corners up to the peg */
+    content: "";
+    position: absolute;
+    left: 20%; right: 20%; bottom: calc(100% + 4px);
+    height: 2.4rem;
+    background:
+        linear-gradient(to top right, transparent calc(50% - 1.6px), var(--ink) calc(50% - 1.6px) calc(50% + 1.6px), transparent calc(50% + 1.6px)) left / 50% 100% no-repeat,
+        linear-gradient(to top left, transparent calc(50% - 1.6px), var(--ink) calc(50% - 1.6px) calc(50% + 1.6px), transparent calc(50% + 1.6px)) right / 50% 100% no-repeat;
+}
+.bp .sheet::after {                        /* the peg */
+    content: "";
+    position: absolute;
+    left: 50%; bottom: calc(100% + 2.4rem - .4rem);
+    width: 1rem; height: 1rem;
+    translate: -50% 0;
+    border-radius: 50%;
+    background: var(--tone);
+    border: 3px solid var(--ink);
+}
+.bp .crop { position: absolute; width: 1.2rem; height: 1.2rem; border: 0 solid var(--line); }
+.bp .crop.tl { top: .6rem; left: .6rem; border-top-width: 2px; border-left-width: 2px; }
+.bp .crop.br { bottom: .6rem; right: .6rem; border-bottom-width: 2px; border-right-width: 2px; }
+
+.site-page > header.bp.bp h1 {
+    position: relative;
+    justify-self: start;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #fff8e7;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    font: 400 clamp(1.8rem, 3.6vw, 3.1rem)/1.04 var(--display);
+    letter-spacing: -.02em;
+    text-align: left;
+    text-wrap: balance;
+    text-shadow: 3px 3px 0 var(--tone);
+}
+.bp .dim { position: absolute; color: var(--line); pointer-events: none; }
+.bp .dim.w { left: 0; right: 0; bottom: -1rem; height: .7rem; border-inline: 2px solid; }
+.bp .dim.w::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px solid; }
+.bp .dim.h { top: .1em; bottom: .1em; left: -1.1rem; width: .7rem; border-block: 2px solid; }
+.bp .dim.h::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 2px solid; }
+
+/* ---- the drafted object on each sheet ---- */
+.bp .draft { display: block; width: 100%; height: auto; max-height: 11rem; overflow: visible; }
+.bp .draft .draw   { fill: none; stroke: var(--line); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.bp .draft .accent { fill: color-mix(in srgb, var(--tone) 40%, transparent); stroke: var(--tone); stroke-width: 4.5; stroke-linejoin: round; }
+.bp .draft .accent-line { fill: none; stroke: var(--tone); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+.bp .draft .center { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 16 5 3 5; opacity: .75; }
+.bp .draft .spin-a { transform-box: view-box; transform-origin: 118px 118px; animation: bp-turn 30s linear infinite; }
+.bp .draft .spin-b { transform-box: view-box; transform-origin: 222px 208px; animation: bp-turn 20s linear infinite reverse; }
+.bp .draft .spin-nut { transform-box: view-box; transform-origin: 228px 104px; animation: bp-turn 14s linear infinite; }
+.bp .draft .hand-m { transform-box: view-box; transform-origin: 150px 150px; animation: bp-turn 12s linear infinite; }
+.bp .draft .hand-h { transform-box: view-box; transform-origin: 150px 150px; animation: bp-turn 144s linear infinite; }
+.bp .draft .tick { stroke-dasharray: 40; animation: bp-tick 3.2s ease-in-out infinite; }
+.bp .draft .glow { transform-box: view-box; transform-origin: 150px 118px; animation: bp-glow 2.4s ease-in-out infinite alternate; }
+
+@keyframes bp-swing {
+    0%   { rotate: 7deg; }
+    35%  { rotate: -5deg; }
+    65%  { rotate: .5deg; }
+    100% { rotate: -1.5deg; }
+}
+@keyframes bp-turn { to { rotate: 360deg; } }
+@keyframes bp-tick { 0%, 15% { stroke-dashoffset: 40; } 45%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 40; } }
+@keyframes bp-glow { from { scale: .92; opacity: .55; } to { scale: 1.06; opacity: 1; } }
+
+/* ---- phones: the sheet takes the width, tools peek from behind it ---- */
+@media (max-width: 700px) {
+    .site-page > header.bp.bp {
+        width: calc(100% - 2rem);
+        min-height: 15rem;
+        margin: 1.25rem auto 3rem;
+        padding: 3.8rem .75rem 2rem;
+    }
+    .bp .rack { opacity: .55; }
+    .bp .rack.left  { left: -5.5rem; }
+    .bp .rack.right { right: -5.5rem; }
+    .bp .sheet {
+        grid-template-columns: minmax(0, 1fr) 4.5rem;
+        gap: .6rem;
+        width: 100%;
+        padding: 1.4rem 1rem 1.9rem 1.9rem;
+    }
+    .site-page > header.bp.bp h1 { font-size: clamp(1.5rem, 7vw, 2.2rem); text-shadow: 2px 2px 0 var(--tone); }
+}
+@media (max-width: 360px) {
+    .bp .sheet { grid-template-columns: 1fr; }
+    .bp .draft { position: absolute; right: .6rem; bottom: .9rem; width: 4.5rem; opacity: .4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bp .sheet, .bp .draft * { animation: none !important; }
+}

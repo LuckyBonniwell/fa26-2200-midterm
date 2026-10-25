@@ -1,0 +1,235 @@
+/* D: C's CSS-inertia, word transitions and badge, with B's ring/disc/puff explosion.
+   Longer pinned scroll distances make the blast and BLOW visible through large wheel steps;
+   the compositor-friendly shapes are gated so hidden pieces do not exhaust tile memory. */
+
+@property --t { syntax: '<number>'; inherits: true; initial-value: 0; }
+
+.intro.vd {
+    /* The extra 100vh is a BTU LAB hold before the stage exits and the badge docks. */
+    height: 1150vh; view-timeline: --intro block;
+}
+.vd .stage, .vd .mascot { transition: --t 0.52s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.vd .disc {
+    position: absolute; z-index: var(--z); left: var(--cx); top: var(--cy);
+    width: var(--size); aspect-ratio: 1; border-radius: 50%; border: 1.2vmin solid var(--ink);
+    translate: -50% -50%; scale: 0.02;
+    background: var(--dots), var(--c); background-size: 12px 12px, auto;
+}
+.vd .d-red { --size: calc(1.5 * var(--cover)); --c: var(--crimson); --z: 2; }
+.vd .d-sun { --size: calc(2 * var(--cover) + 2rem); --c: var(--sun); --z: 4; }
+.vd .ring { --z: 3; }
+.vd .puff {
+    position: absolute; z-index: 4; left: var(--cx); top: var(--cy);
+    width: var(--p); aspect-ratio: 1; translate: -50% -50%; scale: 0;
+    border-radius: 50%; background: var(--paper); border: 5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+.vd .p1 { --p: 24vmin; --dx: -34vmin; --dy: -22vmin; }
+.vd .p2 { --p: 30vmin; --dx: 30vmin;  --dy: -26vmin; }
+.vd .p3 { --p: 20vmin; --dx: 38vmin;  --dy: 18vmin; }
+.vd .p4 { --p: 26vmin; --dx: -36vmin; --dy: 24vmin; }
+.vd .w1 { --z: 5; }
+.vd .wipe { position: absolute; inset: 0; z-index: var(--z); }
+/* the red panel has a fixed diagonal right edge and slides in (transform only); changing a clip-path every
+   frame instead made Chrome redraw it at full size each frame and run out of graphics memory */
+.vd .wipe-red { --z: 6; right: auto; width: calc(100% + 45vh); translate: -100% 0;
+                background: var(--dots), var(--crimson); background-size: 12px 12px, auto;
+                clip-path: polygon(0 0, 100% 0, calc(100% - 45vh) 100%, 0 100%); }
+.vd .w2 { --z: 7; }
+.vd .wipe-ink { --z: 8; translate: 0 -102%; border-bottom: 8px solid var(--ink);
+                background: radial-gradient(rgb(255 255 255 / 0.12) 1.5px, transparent 1.7px), var(--ink); background-size: 12px 12px, auto; }
+.vd .w3 { --z: 9; --shadow: var(--crimson); }
+.vd .p-teal { --c: var(--teal); --z: 10; }
+/* Responsive AI outpainting gives both widths a continuous scene, not a padded blue bar. */
+.intro.vd + #content picture { display: block; }
+.intro.vd + #content .hero-art {
+    aspect-ratio: 2.8 / 1; height: clamp(13.75rem, 32vw, 23.75rem); max-height: none;
+    object-fit: cover; object-position: center; background: #026dad;
+}
+@media (max-width: 700px) {
+    .intro.vd + #content .hero-art { aspect-ratio: 16 / 10; height: min(28vh, 13.75rem); }
+}
+/* Same hierarchy as the regular home page: title straddles the image; original copy follows below. */
+.intro.vd + #content .hero-caption {
+    width: fit-content; max-width: calc(100% - 2rem);
+    margin: -2.6rem auto 0; padding: 0.2rem 0.8rem;
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(1.75rem, 5.5vw, 4rem); letter-spacing: .012em; line-height: 1.15;
+    text-align: center; color: var(--ink); box-shadow: 6px 6px 0 var(--crimson);
+}
+.intro.vd + #content .hero-description {
+    max-width: min(72rem, calc(100% - 3rem)); margin: 1.6rem auto 0;
+    padding: 1.1rem 1.5rem; font-size: 1.2rem; line-height: 1.55;
+    background: #fff; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--teal);
+}
+@media (max-width: 700px) {
+    .intro.vd + #content .hero-caption { margin-top: -1.4rem; }
+    .intro.vd + #content .hero-description { max-width: calc(100% - 2rem); margin: 1.4rem 1rem 0; padding: 1rem; font-size: 1.0625rem; }
+}
+
+@supports (animation-timeline: view()) {
+@media (prefers-reduced-motion: no-preference) {
+    .intro.vd { animation: progD linear both; animation-timeline: --intro; animation-range: contain 0% contain 100%; }
+
+    /* each piece: --q = its own 0..1 progress between --a and --b; --e = eased (ease-out cubic);
+       --bk = ease-out with a small overshoot ("back"); --on = 0 before the piece starts, 1 after */
+    .vd .k {
+        --q: clamp(0, (var(--t) - var(--a)) / (var(--b) - var(--a)), 1);
+        --e: calc(1 - (1 - var(--q)) * (1 - var(--q)) * (1 - var(--q)));
+        --bk: calc(1 + 2.70158 * (var(--q) - 1) * (var(--q) - 1) * (var(--q) - 1) + 1.70158 * (var(--q) - 1) * (var(--q) - 1));
+        --on: clamp(0, var(--q) * 1000, 1);
+    }
+
+    /* gates: each piece is only drawn while it can be seen, so no browser holds every full-screen piece in
+       graphics memory at once. --vis is 1 inside the piece's window [--v0, --v1) and 0 outside; a piece's scale
+       is multiplied by it, and scale 0 has no area, so it is neither seen nor rasterized. Plain calc() on purpose:
+       an earlier version used CSS if(), which shipping Safari (26, 27) does not support, so Safari fell back to a
+       static title and never ran the intro. */
+    .vd .k {
+        --v0: -1; --v1: 2;
+        --vis: calc(clamp(0, (var(--t) - var(--v0)) * 10000, 1) * clamp(0, (var(--v1) - var(--t)) * 10000, 1));
+    }
+    .vd .bomb-art { --v1: 0.31; }
+    .vd .cue      { --v1: 0.04; }
+    .vd .ring, .vd .d-red, .vd .puff { --v0: 0.265; --v1: 0.39; }
+    .vd .shard    { --v0: 0.275; --v1: 0.4; }
+    .vd .d-sun    { --v0: 0.3;   --v1: 0.62; }
+    .vd .w1       { --v0: 0.33;  --v1: 0.605; }
+    .vd .wipe-red { --v0: 0.55;  --v1: 0.79; }
+    .vd .w2       { --v0: 0.58;  --v1: 0.79; }
+    .vd .wipe-ink { --v0: 0.735; --v1: 0.975; }
+    .vd .w3       { --v0: 0.75;  --v1: 0.975; }
+    /* p-teal and the badge start at scale 0 by their own easing, so they need no gate. */
+
+    /* fuse burns, spark rides it */
+    .vd .fuse path { --a: 0; --b: 0.27; stroke-dashoffset: calc(100 * var(--q)); }
+    .vd .spark { --a: 0; --b: 0.27; offset-distance: calc(100% * (1 - var(--q))); }
+    .vd .cue { --a: 0; --b: 0.04; opacity: calc(1 - var(--q)); scale: var(--vis); }
+
+    /* shake grows, then the bomb balloons and pops */
+    .vd .bomb-art {
+        --a: 0.11; --b: 0.27;
+        --p: clamp(0, (var(--t) - 0.265) / 0.04, 1);
+        translate: calc(sin(var(--q) * 60rad) * 14px * var(--q)) calc(cos(var(--q) * 70rad) * 7px * var(--q));
+        scale: calc((1 + 0.8 * var(--p)) * var(--vis));
+        opacity: calc(1 - clamp(0, (var(--p) - 0.6) / 0.4, 1));
+    }
+    /* B's explosion: staggered rings, red and yellow discs, smoke and flying pieces.
+       All share C's transitioned --t so a fast wheel flick still animates through intermediate values. */
+    .vd .ring {
+        --a: 0.27; --b: 0.38;
+        --r: clamp(0, (var(--t) - var(--a) - var(--stagger)) / (var(--b) - var(--a) - var(--stagger)), 1);
+        scale: calc((0.02 + 5.98 * var(--r)) * var(--vis)); opacity: calc(1 - var(--r));
+    }
+    .vd .r1 { --stagger: 0; }
+    .vd .r2 { --stagger: 0.014; }
+    .vd .r3 { --stagger: 0.028; }
+    /* The discs expand across the full blast distance, not in a few ease-out frames. */
+    .vd .d-red { --a: 0.265; --b: 0.36; scale: calc((0.02 + 1.14 * var(--q)) * var(--vis)); }
+    .vd .d-sun { --a: 0.30; --b: 0.39; scale: calc((0.02 + 0.98 * var(--q)) * var(--vis)); }
+    .vd .puff {
+        --a: 0.28; --b: 0.39;
+        scale: calc((0.15 + 1.15 * var(--e)) * var(--vis));
+        transform: translate(calc(var(--dx) * var(--e)), calc(var(--dy) * var(--e)));
+        opacity: calc(1 - clamp(0, (var(--q) - 0.65) / 0.35, 1));
+    }
+    .vd .shard {
+        --a: 0.275; --b: 0.4; scale: var(--vis);
+        transform: translate(calc(var(--dx) * var(--e)), calc(var(--dy) * var(--e))) rotate(calc(var(--r) * var(--e))) scale(calc(var(--on) * (0.5 + 0.8 * var(--e))));
+        opacity: calc(1 - clamp(0, (var(--q) - 0.7) / 0.3, 1));
+    }
+
+    /* C's BLOW. punches through B's yellow disc, then drifts and shrinks away. */
+    .vd .w1 {
+        --a: 0.33; --b: 0.43;
+        --g: clamp(0, (var(--t) - 0.43) / 0.11, 1);
+        --x: clamp(0, (var(--t) - 0.54) / 0.06, 1);
+        transform: rotate(calc(18deg * (1 - var(--e)))) scale(calc((0.2 + 0.8 * var(--bk) + 0.1 * var(--g)) * (1 - 0.4 * var(--x))));
+        scale: var(--vis);
+        opacity: calc(var(--on) * (1 - var(--x)));
+    }
+    /* red diagonal wipe */
+    .vd .wipe-red {
+        --a: 0.55; --b: 0.62; --s: calc(var(--q) * var(--q) * (3 - 2 * var(--q)));
+        translate: calc(-100% * (1 - var(--s))) 0; scale: var(--vis);
+    }
+    /* THINGS. slides in sheared, straightens, drifts, shrinks away */
+    .vd .w2 {
+        --a: 0.58; --b: 0.68;
+        --g: clamp(0, (var(--t) - 0.68) / 0.05, 1);
+        --x: clamp(0, (var(--t) - 0.73) / 0.05, 1);
+        transform: translateX(calc(60vw * (1 - var(--bk)) - 2vw * var(--g))) skewX(calc(-18deg * (1 - var(--e)))) scale(calc((1 + 0.08 * var(--g)) * (1 - 0.4 * var(--x))));
+        scale: var(--vis);
+        opacity: calc(var(--on) * (1 - var(--x)));
+    }
+    /* navy panel drops with a little overshoot */
+    .vd .wipe-ink { --a: 0.735; --b: 0.8; translate: 0 calc(-102% * (1 - var(--bk))); scale: var(--vis); }
+    /* UP. falls, bounces once, squashes, then flies at the camera */
+    .vd .w3 {
+        --a: 0.75; --b: 0.82;
+        --f: calc(var(--q) * var(--q));
+        --bn: clamp(0, (var(--t) - 0.82) / 0.04, 1);
+        --sq: calc(sin(clamp(0, (var(--t) - 0.845) / 0.025, 1) * 3.14159rad) * 0.07);
+        --g: clamp(0, (var(--t) - 0.86) / 0.035, 1);
+        --x: clamp(0, (var(--t) - 0.925) / 0.045, 1);
+        /* the fall uses translate in screen space, so it drops from the top at every width */
+        translate: -50% calc(-50% - 80vh * (1 - var(--f)) - 6vh * sin(var(--bn) * 3.14159rad));
+        transform: rotate(calc(-12deg * (1 - var(--q))))
+                   scale(calc((1 + var(--sq)) * (1 + 0.08 * var(--g)) * (1 + 2.5 * var(--x) * var(--x))), calc((1 - var(--sq)) * (1 + 0.08 * var(--g)) * (1 + 2.5 * var(--x) * var(--x))));
+        opacity: calc(var(--on) * (1 - var(--x)));
+        scale: var(--vis);
+    }
+    /* UP stays fully present after its bounce; the BTU reveal waits another short scroll beat. */
+    .vd .p-teal { --a: 0.93; --b: 0.985; scale: var(--e); }
+    .vd .badge-in { --a: 0.945; --b: 1; scale: var(--bk); rotate: calc(-60deg * (1 - var(--e))); }
+
+    /* the dock happens after the intro, so it rides the plain scroll timeline */
+    .vd .badge {
+        animation: dock linear both, badge-handoff linear both;
+        animation-timeline: --intro, --intro;
+        animation-range: exit 0% exit 60%, exit 0% exit 60%;
+    }
+    .vd .skip-wrap { animation: fadeout linear both; animation-timeline: --intro; animation-range: exit 0% exit 25%; }
+    /* Do not pin every hidden full-screen piece into its own GPU layer. Chrome promotes
+       active transforms as needed; the visibility gates above still bound raster work. */
+}
+}
+@keyframes badge-handoff { 0%, 98.75% { opacity: 1; } 100% { opacity: 0; } }
+/* The large BTU LAB badge lands in the nav and becomes the nav mark. The two are drawn the same
+   (home.css .nav-mark), so the swap happens over the last ~1% of the dock, when they are within a few
+   pixels of each other; an earlier, longer crossfade showed two stars at once.
+   Scope the intro timeline to body so its sibling nav can follow the same scroll. */
+@supports (animation-timeline: view()) {
+@media (prefers-reduced-motion: no-preference) {
+    body.comic:has(.intro.vd) { timeline-scope: --intro; }
+    body.comic:has(.intro.vd) nav[aria-label="Main"] .nav-mark {
+        animation: intro-nav-reveal linear both;
+        animation-timeline: --intro;
+        animation-range: exit 59.25% exit 60%;
+    }
+}
+}
+@keyframes intro-nav-reveal { from { opacity: 0; } to { opacity: 1; } }
+/* intro skipped (js/intro-pref.js): no timeline to follow, so the nav mark is simply there */
+html.no-intro body.comic:has(.intro.vd) nav[aria-label="Main"] .nav-mark { animation: none; opacity: 1; }
+/* 950vh of animation from the previous 1050vh intro, then 100vh at the final frame.
+   950/1050 = 90.47619% of the new contain timeline. Earlier beats keep their exact scroll distances. */
+@keyframes progD {
+    0% { --t: 0; }
+    90.47619%, 100% { --t: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intro.vd { height: auto; }
+    .vd .stage { position: relative; height: auto; padding: 2.5rem 1rem; background: var(--dots), var(--sun); background-size: 12px 12px, auto; }
+    .vd .stage > :not(.slam), .vd .mascot, .vd .skip-wrap { display: none; }
+    .vd h1.slam { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.35em; }
+    .vd .w { position: static; translate: none; rotate: none; font-size: clamp(3rem, 11vw, 7.5rem); }
+    .vd .spark i, .vd .cue, .vd .rays { animation: none; }
+}
+@supports not (animation-timeline: view()) {
+    .intro.vd { height: auto; }
+    .vd .stage { position: relative; height: auto; padding: 2.5rem 1rem; background: var(--dots), var(--sun); background-size: 12px 12px, auto; }
+    .vd .stage > :not(.slam), .vd .mascot, .vd .skip-wrap { display: none; }
+    .vd h1.slam { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.35em; }
+    .vd .w { position: static; translate: none; rotate: none; font-size: clamp(3rem, 11vw, 7.5rem); }
+}
