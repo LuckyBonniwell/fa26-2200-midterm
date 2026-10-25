@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/btu-logo.jpg" type="image/jpeg">
-    <title>CNC</title>
+    <title>Electronics</title>
 
     <link rel="preconnect" href="https://use.typekit.net" />
     <link rel="stylesheet" href="https://use.typekit.net/wij1sxx.css" />
-    <link rel="stylesheet" href="../CSS/styleToolsPages.css?v=final-7">
+    <link rel="stylesheet" href="CSS/styleToolsPages.css?v=final-7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap">
-    <link rel="stylesheet" href="../CSS/toolHero.css?v=final-7">
+    <link rel="stylesheet" href="CSS/toolHero.css?v=final-7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap">
-    <link rel="stylesheet" href="../CSS/home.css?v=final-7">
-    <link rel="stylesheet" href="../CSS/site-pages.css?v=final-7">
+    <link rel="stylesheet" href="CSS/home.css?v=final-7">
+    <link rel="stylesheet" href="CSS/site-pages.css?v=final-7">
 </head>
-<body class="tool-area area-cnc comic site-page tool-page">
-    <nav aria-label="Main">
+<body class="tool-area area-electronics comic site-page tool-page">
+ <nav aria-label="Main">
     <a class="nav-branding" href="index.html">
         <span class="nav-mark" aria-hidden="true"><span class="nav-mark-spin"><span class="sh shadow"></span><span class="sh ink"></span><span class="sh fill"></span></span><span class="nav-mark-text">BTU<br>LAB</span></span>
         <span>BTU Lab</span>
@@ -52,7 +52,7 @@
     </ul>
 </nav>
 
-    <header class="th-header th-area-cnc">
+    <header class="th-header th-area-elec">
         <!-- the animated hero shenanigans (CSS/toolHero.css): every area of the lab, only this page's one in color and moving -->
         <nav class="tool-hero" aria-label="Lab areas">
             <a class="th-panel th-tools" href="tools.html">
@@ -122,7 +122,7 @@
                 </svg>
                 <span class="th-tag">Lasers</span>
             </a>
-            <a class="th-panel th-elec" href="electronics.html">
+            <a class="th-panel th-elec" href="electronics.html" aria-current="page">
                 <svg class="th-art" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                     <rect class="wood k" x="0" y="250" width="400" height="60"/>
                     <polygon class="pcb k3" points="44,234 356,234 330,204 70,204"/>
@@ -189,7 +189,7 @@
                 </svg>
                 <span class="th-tag">3D Printers</span>
             </a>
-            <a class="th-panel th-cnc" href="cnc.html" aria-current="page">
+            <a class="th-panel th-cnc" href="cnc.html">
                 <svg class="th-art" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                     <defs><clipPath id="th-bitclip"><rect x="-4" y="164" width="8" height="24"/></clipPath></defs>
                     <rect class="steel k" x="26" y="226" width="348" height="22" rx="3"/><rect class="navy" x="40" y="248" width="16" height="60"/><rect class="navy" x="344" y="248" width="16" height="60"/>
@@ -213,31 +213,42 @@
                 <span class="th-tag">CNC</span>
             </a>
         </nav>
-        <h1 class="tool-title">CNC</h1>
+        <h1 class="tool-title">Electronics</h1>
     </header>
 
         <main>
     <article>
-        <h2 class="color-sentence"><span class="swatch swatch-cnc"></span> CNC equipment and materials are labeled BLUE.</h2>
+        <h2 class="color-sentence"><span class="swatch-electronics"></span>Electronics equipment is labeled... teal? Cyan? Turquoise? Aqua? Oh, lort...THIS COLOR!</h2>
     </article>
+
 
 
     <article class="photo-text">
-        <img src="images/cnc-photo.jpg" alt="CNC machine" class="supplementary-img">
+        <img src="images/electronics-photo.jpg" alt="Workbenches with soldering stations in the electronics area" class="supplementary-img">
         <div class="article-text">
         <h2><strong>Important Information</strong></h2>
-        <h3>WE GOT ONE!</h3>
-        <p>Thanks to generous support BTU purchased a Shaper Origin CNC router in 2026!</p>
-        <p>The Shaper is a precision (expensive) tool! Please contact Zack at <a href="mailto:zack.weaver@colorado.edu">zack.weaver@colorado.edu</a> to get started.</p>
-        <p>Basic operation of the Shaper can be found here: <a href="https://www.youtube.com/watch?v=QxjE5WOAGi4">www.youtube.com/watch?v=QxjE5WOAGi4</a></p>
+        <h3>With great power...</h3>
+        <p> Electronics and coding training happens as requested by staff and/or community members. It is also the subject of some ATLAS classes and BTU workshops. See workshops on the <a href="workshops.html#calendar">BTU Lab Calendar</a>.<br>
+        See the <a href="mischiefMakers.html">BTU Mischief Maker page</a> to contact one of our community experts to get you started.</p>
     </div>
     </article>
 
+
     <article>
-        <h3>Special Notes</h3>
-            <p><strong>FACULTY:</strong> Class assignments requiring Shaper CNC should be coordinated by LAs, TAs, or instructors. (Questions: "zack.weaver@colorado.edu")</p>
-            <p><strong>STUDENTS:</strong> Assistance with Shaper CNC for class assignments should be coordinated with class LAs or TAs first, then "BTU Mischief Makers", if available.</p>
-            <p><strong>EVERYBODY:</strong> A brief training is required before using the Shaper CNC.</p>
+        <h2><strong>Electronics Equipment &amp; Supplies</strong></h2>
+        <ul class="materials-list">
+            <li>Solder Irons &amp; Accessories</li>
+            <li>Bench Top Power Supplies</li>
+            <li>Soldering Rework Station</li>
+            <li>Digital Oscilloscope</li>
+            <li>Arduino / Raspberry Pi ecosystem</li>
+            <li>Various Power Components (V=I*R stuff!)</li>
+            <li>Various Input Components</li>
+            <li>Various Output Components</li>
+            <li>LilyPad</li>
+            <li>Prototyping Supplies</li>
+            <li>UhhhhANDMORE!</li>
+        </ul>
     </article>
 
     </main>
