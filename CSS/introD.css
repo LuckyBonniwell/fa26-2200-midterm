@@ -191,10 +191,17 @@ html.intro-gliding .vd .stage, html.intro-gliding .vd .mascot { transition: none
         animation-range: exit 0% exit 60%, exit 0% exit 60%;
     }
     .vd .skip-wrap { animation: fadeout linear both; animation-timeline: --intro; animation-range: exit 0% exit 25%; }
+    /* While the badge flies to the nav (exit 0-60%), the burst behind it stays put and fades out, and the page
+       slides up over it. Before, the burst scrolled off the top while the badge flew to the corner, so scrolling
+       back up showed the badge coming out of the corner with the burst still sliding down from above
+       (dash, 10-25: "It doesn't reverse that cleanly from the corner back into the main central part").
+       translate cancels the scroll: the exit range is one screen tall, so 60% of it is 60vh. */
+    .vd .stage { animation: stage-hold linear both; animation-timeline: --intro; animation-range: exit 0% exit 60%; }
     /* Do not pin every hidden full-screen piece into its own GPU layer. Chrome promotes
        active transforms as needed; the visibility gates above still bound raster work. */
 }
 }
+@keyframes stage-hold { to { translate: 0 60vh; opacity: 0; } }
 @keyframes badge-handoff { 0%, 98.75% { opacity: 1; } 100% { opacity: 0; } }
 /* The large BTU LAB badge lands in the nav and becomes the nav mark. The two are drawn the same
    (home.css .nav-mark), so the swap happens over the last ~1% of the dock, when they are within a few

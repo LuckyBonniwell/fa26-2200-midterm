@@ -294,3 +294,33 @@
     .comic .footer-logo img { width: 6rem; }
     .comic .footer-bottom { margin-top: 2rem; }
 }
+
+/* Footer, cut down (dash, 10-25): just the BTU logo with its tagline, and the Instagram button labeled
+   "Check that IG". No link lists, no address block, no divider line, no copyright. The rules above for the
+   old footer parts no longer match anything. "Bring back the intro" stays, hidden, until someone picks
+   "Skip intro from now on" (it's the only way to undo that). */
+.comic footer.site-footer { padding: 2.25rem 1.5rem; }
+.comic .site-footer .footer-simple { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; max-width: 75rem; margin: 0 auto; }
+.comic .site-footer .insta-link,
+.comic .site-footer .insta-link:visited {
+    display: inline-flex; align-items: center; gap: .8rem; border: 0; border-radius: 0; box-shadow: none;
+    color: var(--paper); text-decoration: none; font: 400 1.25rem/1 var(--display); letter-spacing: .01em;
+}
+.comic .site-footer .insta-link .insta-icon { border: 3px solid #fff; box-shadow: 4px 4px 0 var(--sun); transition: translate .15s, box-shadow .15s; }
+.comic .site-footer .insta-link:hover,
+.comic .site-footer .insta-link:focus-visible { translate: none; box-shadow: none; color: #fff; }
+.comic .site-footer .insta-link:hover .insta-icon,
+.comic .site-footer .insta-link:focus-visible .insta-icon { translate: -2px -2px; box-shadow: 6px 6px 0 var(--sun); }
+@media (max-width: 700px) {
+    .comic footer.site-footer { padding: 1.75rem 1rem; }
+    .comic .site-footer .insta-link { font-size: 1.05rem; gap: .6rem; }
+}
+
+/* Button colorway (dash, 10-25: "I like the teal for both of them"): teal with cream text and a yellow shadow, for the
+   homepage Wood Shop button and the footer Instagram circle */
+.comic .wood-feature .wood-cta,
+.comic .wood-feature .wood-cta:visited { background: var(--teal); color: var(--paper); box-shadow: 0 7px 0 var(--sun), 0 7px 0 3px var(--ink); }
+.comic .wood-feature .wood-cta:hover,
+.comic .wood-feature .wood-cta:focus-visible { background: var(--teal); color: #fff; box-shadow: 0 10px 0 var(--sun), 0 10px 0 3px var(--ink); }
+.comic .wood-feature .wood-cta:active { box-shadow: 0 2px 0 var(--sun), 0 2px 0 3px var(--ink); }
+.comic .insta-icon { background-color: var(--teal); }

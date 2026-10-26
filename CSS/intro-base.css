@@ -66,6 +66,7 @@
 }
 .fuse { position: absolute; left: 0; top: 0; width: 780px; height: 520px; overflow: visible; }
 .fuse path { fill: none; stroke-linecap: round; stroke-dasharray: 100 100; }
+.fuse .f-narrow { display: none; }
 .cap {
     position: absolute; left: 207px; top: 168px; width: 75px; height: 46px;
     background: #34334a; border: 5px solid var(--ink); border-radius: 6px; rotate: 30deg;
@@ -171,15 +172,20 @@
         --s: tan(atan2(min(58vh, calc(100vw - 2rem) * 0.6667), 520px));
         --fuse-path: path('M256 186 C259.84 130 284.16 78 328.96 66 C380.16 52 424.96 90 442.88 150 C455.68 194 476.16 226 506.88 222 C529.92 219 544 196 547.84 172');
     }
-    .fuse path {
-        transform: translateX(92.16px) scaleX(.64);
-        transform-origin: 0 0; transform-box: view-box;
-        vector-effect: non-scaling-stroke;
-    }
+    /* the phone fuse is its own path (index.html .f-narrow), the same curve as --fuse-path here. It used to be
+       the wide path squeezed with scaleX, and squeezing changes where along the curve each percent falls, so the
+       burning end and the spark (which rides --fuse-path) drifted apart (dash, 10-25: "the spark is not
+       connected to the fuse"). */
+    .fuse .f-wide { display: none; }
+    .fuse .f-narrow { display: inline; }
     /* Keep the word slams horizontal on phones. The base .w font-size uses 86vw / --em,
        so even THINGS. fits the available width without turning sideways. */
     /* The yellow burst behind BTU LAB: at full size (about 3x the screen width) a phone only sees a slab of it,
        which reads as off-centre while it spins. Sized to the phone, the whole star shows around the badge. */
     .p-teal .rays { width: 135vw; }
+    /* The star is smaller than the teal circle at every size, so the circle doesn't need to clip it; dropping
+       the round clip keeps Safari from drawing the spinning star out of place while the circle grows (dash
+       saw only a corner of it, up and to the left, mid-reveal at 400 on 10-25). */
+    .p-teal { overflow: visible; }
     .skip-wrap { flex-direction: column; align-items: flex-end; gap: .55rem; top: calc(100vh - 5.5rem); padding-right: 0.75rem; }
 }
